@@ -7,8 +7,8 @@ A simple note-taking application that uses Express.js on the backend and saves n
 ## Installation
 
 To run this project, install it locally using npm:
-$ npm install
-$ npm start
+- $ npm install
+- $ npm start
 
 ## Usage
 
