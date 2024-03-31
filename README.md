@@ -13,7 +13,7 @@ Note Taker is a web app designed to assist users in easily jotting down, organis
 
 ## Getting Started
 
-To access the Note Taker application, [click here](https://hr-virieux.github.io/note-taker/public/index.html). This link will take you directly to the application, hosted on GitHub Pages.
+To access the Note Taker application, [click here](https://hr-virieux.github.io/note-taker/public/index.html).
 
 ## How to Use
 
