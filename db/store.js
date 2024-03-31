@@ -1,57 +1,32 @@
-// Import Node.js modules
-const util = require('util');
 const fs = require('fs');
+const util = require('util');
 const path = require('path');
-const uuidv1 = require('uuid/v1'); // Import uuid to generate unique IDs
+const { v4: uuidv4 } = require('uuid');
 
-// Promisify readFile and writeFile
-const readFromFile = util.promisify(fs.readFile);
-const writeToFile = util.promisify(fs.writeFile);
+const readFileAsync = util.promisify(fs.readFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
 class Store {
-  // Read notes from db.json
-  read() {
-    return readFromFile(path.join(__dirname, 'db.json'), 'utf8');
-  }
-
-  // Write notes to db.json
-  write(note) {
-    return writeToFile(path.join(__dirname, 'db.json'), JSON.stringify(note));
-  }
-
-  // Retrieve notes
-  getNotes() {
-    return this.read().then((notes) => {
-      let parsedNotes;
-      try {
-        parsedNotes = [].concat(JSON.parse(notes));
-      } catch (err) {
-        parsedNotes = [];
-      }
-      return parsedNotes;
-    });
-  }
-
-  // Add a new note with a unique ID, then save the note
-  addNote(note) {
-    const { title, text } = note;
-    if (!title || !text) {
-      throw new Error("Fill in 'title' and 'text'");
+    async getNotes() {
+        const data = await readFileAsync(path.join(__dirname, 'db.json'), 'utf8');
+        return JSON.parse(data);
     }
-    const newNote = { title, text, id: uuidv1() };
 
-    return this.getNotes()
-      .then((notes) => [...notes, newNote])
-      .then((updatedNotes) => this.write(updatedNotes))
-      .then(() => newNote);
-  }
+    async addNote(note) {
+        const { title, text } = note;
+        const newNote = { title, text, id: uuidv4() };
+        const notes = await this.getNotes();
+        const updatedNotes = [...notes, newNote];
+        await writeFileAsync(path.join(__dirname, 'db.json'), JSON.stringify(updatedNotes));
+        return newNote;
+    }
 
-  // Remove a note by its ID
-  removeNote(id) {
-    return this.getNotes()
-      .then((notes) => notes.filter((note) => note.id !== id))
-      .then((filteredNotes) => this.write(filteredNotes));
-  }
+    async removeNote(id) {
+        const notes = await this.getNotes();
+        const filteredNotes = notes.filter(note => note.id !== id);
+        await writeFileAsync(path.join(__dirname, 'db.json'), JSON.stringify(filteredNotes));
+        return filteredNotes;
+    }
 }
 
 module.exports = new Store();
