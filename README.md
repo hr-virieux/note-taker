@@ -1,23 +1,43 @@
-# Note Taker Application
+# Note Taker
 
 ## Description
 
-A simple note-taking application that uses Express.js on the backend and saves notes with unique IDs in a JSON file.
+Note Taker is a web app designed to assist users in easily jotting down, organising, and accessing their notes. This application utilises Express.js for the backend and provides a clean, responsive frontend interface.
 
-## Installation
+## Features
 
-To run this project, install it locally using npm:
-- $ npm install
-- $ npm start
+- **Create Notes**: Add new notes with titles and content.
+- **View Notes**: Peruse all your saved notes in one place.
+- **Delete Notes**: Remove notes that you no longer need.
+- **Responsive Design**: Access your notes on any device, thanks to a mobile-friendly design.
 
-## Usage
+## Getting Started
 
-After starting the server, navigate to `localhost:3000` in your browser to view the application.
+To access the Note Taker application, [click here](https://hr-virieux.github.io/note-taker/public/index.html). This link will take you directly to the application, hosted on GitHub Pages.
 
-## Contributing
+## How to Use
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+1. **Launch the Application**: Use the link provided above to open the Note Taker.
+2. **Add a Note**: Click on 'Get Started' to navigate to the notes page. There, enter a title and the note's content, then click the 'Save' icon to store your note.
+3. **View Notes**: Your saved notes are listed on the left-hand side of the page. Click on a note to view its content.
+4. **Delete a Note**: Click the 'Trash' icon next to the note you wish to remove.
+
+## Technical Details
+
+- **Backend**: The application's backend is built with Express.js, handling API requests for creating, fetching, and deleting notes.
+- **Frontend**: The frontend is crafted with HTML, CSS, and vanilla JavaScript, offering a simple yet effective user interface.
+- **Data Storage**: Notes are temporarily stored in a `db.json` file, serving as a simple database.
+
+## Local Development
+
+To run Note Taker locally:
+
+1. Clone the repository to your local machine.
+2. Install dependencies with `npm install`.
+3. Start the server with `npm start`.
+4. Open `http://localhost:3001` in your browser to access the application.
+
 
 ## License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
