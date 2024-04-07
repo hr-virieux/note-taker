@@ -1,20 +1,32 @@
 const express = require('express');
-const Store = require('../db/store');
+const store = require('../db/store');
 const router = express.Router();
 
 router.get('/notes', async (req, res) => {
-    const notes = await Store.getNotes();
-    res.json(notes);
+    try {
+        const notes = await store.getNotes();
+        res.json(notes);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 router.post('/notes', async (req, res) => {
-    const note = await Store.addNote(req.body);
-    res.json(note);
+    try {
+        const note = await store.addNote(req.body);
+        res.json(note);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 router.delete('/notes/:id', async (req, res) => {
-    await Store.removeNote(req.params.id);
-    res.json({ message: 'Deleted successfully' });
+    try {
+        await store.removeNote(req.params.id);
+        res.json({ message: 'Note deleted successfully' });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 module.exports = router;
